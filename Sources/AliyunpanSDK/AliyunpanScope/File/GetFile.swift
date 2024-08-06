@@ -25,13 +25,16 @@ extension AliyunpanFileScope {
             public var video_thumbnail_width: Int?
             /// 生成的图片缩略图宽度，默认480px
             public var image_thumbnail_width: Int?
+            /// 指定返回某些字段，逗号分隔： id_path,name_path
+            public var fields: String?
 
-            public init(drive_id: String, file_id: String, video_thumbnail_time: Int? = nil, video_thumbnail_width: Int? = nil, image_thumbnail_width: Int? = nil) {
+            public init(drive_id: String, file_id: String, video_thumbnail_time: Int? = nil, video_thumbnail_width: Int? = nil, image_thumbnail_width: Int? = nil, fields: String? = nil) {
                 self.drive_id = drive_id
                 self.file_id = file_id
                 self.video_thumbnail_time = video_thumbnail_time
                 self.video_thumbnail_width = video_thumbnail_width
                 self.image_thumbnail_width = image_thumbnail_width
+                self.fields = fields
             }
         }
 
