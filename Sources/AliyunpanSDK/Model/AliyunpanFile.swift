@@ -35,8 +35,12 @@ public struct AliyunpanFile: Codable {
     public let video_media_metadata: MediaMetadata?
     /// 视频预览信息
     public let video_preview_metadata: AudioMetaData?
+    /// id_path
+    public let id_path: String?
+    /// name_path
+    public let name_path: String?
     
-    init(drive_id: String, file_id: String, parent_file_id: String, name: String, size: Int64?, file_extension: String?, content_hash: String?, category: FileCategory? = nil, type: FileType?, mime_type: String?, thumbnail: URL?, url: URL?, created_at: Date?, updated_at: Date?, play_cursor: String?, image_media_metadata: MediaMetadata?, video_media_metadata: MediaMetadata?, video_preview_metadata: AudioMetaData? = nil) {
+    init(drive_id: String, file_id: String, parent_file_id: String, name: String, size: Int64?, file_extension: String?, content_hash: String?, category: FileCategory? = nil, type: FileType?, mime_type: String?, thumbnail: URL?, url: URL?, created_at: Date?, updated_at: Date?, play_cursor: String?, image_media_metadata: MediaMetadata?, video_media_metadata: MediaMetadata?, video_preview_metadata: AudioMetaData? = nil, id_path: String? = nil, name_path: String? = nil) {
         self.drive_id = drive_id
         self.file_id = file_id
         self.parent_file_id = parent_file_id
@@ -55,6 +59,8 @@ public struct AliyunpanFile: Codable {
         self.image_media_metadata = image_media_metadata
         self.video_media_metadata = video_media_metadata
         self.video_preview_metadata = video_preview_metadata
+        self.id_path = id_path
+        self.name_path = name_path
     }
     
     public init(from decoder: Decoder) throws {
@@ -77,6 +83,9 @@ public struct AliyunpanFile: Codable {
         self.image_media_metadata = try? container.decodeIfPresent(AliyunpanFile.MediaMetadata.self, forKey: .image_media_metadata)
         self.video_media_metadata = try? container.decodeIfPresent(AliyunpanFile.MediaMetadata.self, forKey: .video_media_metadata)
         self.video_preview_metadata = try? container.decodeIfPresent(AliyunpanFile.AudioMetaData.self, forKey: .video_preview_metadata)
+        self.id_path = try? container.decodeIfPresent(String.self, forKey: .id_path)
+        self.name_path = try? container.decodeIfPresent(String.self, forKey: .name_path)
+        
     }
 }
 
@@ -101,6 +110,8 @@ extension AliyunpanFile: CustomStringConvertible {
     image_media_metadata: \(String(describing: image_media_metadata))
     video_media_metadata: \(String(describing: video_media_metadata))
     video_preview_metadata: \(String(describing: video_preview_metadata))
+    id_path: \(id_path ?? "nil")
+    name_path: \(name_path ?? "nil")
 """
     }
 }
